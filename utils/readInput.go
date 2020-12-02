@@ -8,9 +8,7 @@ import (
 	"strconv"
 )
 
-func ReadInputFile(day string, fileName string) []string {
-	relativeFilePath := "./day" + day + "/" + fileName
-
+func ReadInputFile(relativeFilePath string) []string {
 	// convert to absolute path
 	absPath, err := filepath.Abs(relativeFilePath)
 	if err != nil {
@@ -34,9 +32,7 @@ func ReadInputFile(day string, fileName string) []string {
 	return lines
 }
 
-func ReadInputFileToInts(day string, fileName string) []int {
-	relativeFilePath := "./day" + day + "/" + fileName
-
+func ReadInputFileToInts(relativeFilePath string) []int {
 	// convert to absolute path
 	absPath, err := filepath.Abs(relativeFilePath)
 	if err != nil {
