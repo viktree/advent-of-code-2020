@@ -33,10 +33,6 @@ func PartTwo() {
 	for _, xAsString = range input {
 		x, _ = strconv.Atoi(xAsString)
 		set[x] = true
-	}
-
-	for _, xAsString = range input {
-		x, _ = strconv.Atoi(xAsString)
 		for _, yAsString = range input {
 			y, _ = strconv.Atoi(yAsString)
 			if _, ok := set[2020-(x+y)]; ok {
