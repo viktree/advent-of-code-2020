@@ -12,6 +12,6 @@ func TestPartTwo(t *testing.T) {
 	result := PartTwo(list)
 	expected := 103927824
 	if result != expected {
-		t.Errorf("PartOne(): %d; want %d", result, expected)
+		t.Errorf("Day 1, Part 1: %d; want %d", result, expected)
 	}
 }
