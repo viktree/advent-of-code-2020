@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/viktree/advent-of-code-2020/utils"
+	dayOne "github.com/viktree/advent-of-code-2020/day01"
 )
 
 func main() {
-	fmt.Println(utils.ReverseRunes("!oG ,olleH"))
+	// dayOne.PartOne()
+	dayOne.PartTwo()
 }
