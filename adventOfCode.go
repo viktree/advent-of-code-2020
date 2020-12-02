@@ -9,6 +9,6 @@ import (
 
 func main() {
 	var list = utils.ReadInputFile("day02/input.txt")
-	n := dayTwo.PartOne(list)
+	n := dayTwo.PartTwo(list)
 	fmt.Printf("Answer %d\n", n)
 }
