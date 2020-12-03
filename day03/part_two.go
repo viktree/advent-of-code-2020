@@ -16,7 +16,7 @@ func PartTwo(list []string) int {
 				continue
 			}
 
-			// move accross by computing the coords
+			// move across by computing the coords
 			x := ((row_idx * leftAmt[step]) / downAmt[step]) % nRows
 			if row[x] == '#' {
 				counters[step]++
