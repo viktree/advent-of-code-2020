@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 
-	dayTwo "github.com/viktree/advent-of-code-2020/day02"
+	dayFour "github.com/viktree/advent-of-code-2020/day04"
 	"github.com/viktree/advent-of-code-2020/utils"
 )
 
 func main() {
-	var list = utils.ReadInputFile("day02/input.txt")
-	n := dayTwo.PartTwo(list)
+	var list = utils.ReadInputFile("day04/input.txt")
+	n := dayFour.PartTwo(list)
 	fmt.Printf("Answer %d\n", n)
 }
