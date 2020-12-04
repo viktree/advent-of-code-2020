@@ -10,16 +10,16 @@ func validatePassportKey(key string, value string) bool {
 	var matched bool
 	switch key {
 	case "cid":
-		matched = true
+		return true
 	case "byr":
 		year, _ := strconv.Atoi(value)
-		matched = year >= 1920 && year <= 2002
+		return year >= 1920 && year <= 2002
 	case "iyr":
 		year, _ := strconv.Atoi(value)
-		matched = year >= 2010 && year <= 2020
+		return year >= 2010 && year <= 2020
 	case "eyr":
 		year, _ := strconv.Atoi(value)
-		matched = year >= 2020 && year <= 2030
+		return year >= 2020 && year <= 2030
 	case "pid":
 		matched, _ = regexp.MatchString(`^\d\d\d\d\d\d\d\d\d$`, value)
 	case "hcl":
@@ -31,45 +31,46 @@ func validatePassportKey(key string, value string) bool {
 		matchedIn, _ := regexp.MatchString(`^(\d\d)(in)$`, value)
 		if matchedCm {
 			cm, _ := strconv.Atoi(value[0:3])
-			matched = cm >= 150 && cm <= 193
+			return cm >= 150 && cm <= 193
 		} else if matchedIn {
 			in, _ := strconv.Atoi(value[0:2])
-			matched = in >= 59 && in <= 76
-		} else {
-			matched = false
+			return in >= 59 && in <= 76
 		}
+		return false
 	default:
-		matched = false
+		return false
 	}
 	return matched
 }
 
+func validateEntries(entries []string) bool {
+	for _, entry := range entries {
+		if entry == "" {
+			continue
+		}
+		keyVal := strings.Split(entry, ":")
+		matched := validatePassportKey(keyVal[0], keyVal[1])
+
+		if !matched {
+			return false
+		}
+	}
+	return true
+}
+
 func PartTwo(list []string) int {
-	var matched, isValid bool
+	var isValid bool
 
 	count := 0
 	passports := getPassports(list)
 
 	for _, passport := range passports {
-		if !passportIsValid(passport) {
-			continue
-		}
-		entries := strings.Split(passport, " ")
-		isValid = true
-		for _, entry := range entries {
-			if entry == "" {
-				continue
+		if passportIsValid(passport) {
+			entries := strings.Split(passport, " ")
+			isValid = validateEntries(entries)
+			if isValid {
+				count++
 			}
-			keyVal := strings.Split(entry, ":")
-			matched = validatePassportKey(keyVal[0], keyVal[1])
-
-			if !matched {
-				isValid = false
-				break
-			}
-		}
-		if isValid {
-			count++
 		}
 	}
 
