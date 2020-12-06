@@ -7,7 +7,7 @@ import (
 )
 
 func TestPartOneWithExample(t *testing.T) {
-	var list = utils.ReadInputFile("example2.txt")
+	var list = utils.ReadInputFile("example.txt")
 
 	result := PartOne(list)
 	expected := uint64(820)
