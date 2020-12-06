@@ -32,7 +32,8 @@ func validatePassportKey(key string, value string) bool {
 		if matchedCm {
 			cm, _ := strconv.Atoi(value[0:3])
 			return cm >= 150 && cm <= 193
-		} else if matchedIn {
+		}
+		if matchedIn {
 			in, _ := strconv.Atoi(value[0:2])
 			return in >= 59 && in <= 76
 		}
@@ -49,9 +50,9 @@ func validateEntries(entries []string) bool {
 			continue
 		}
 		keyVal := strings.Split(entry, ":")
-		matched := validatePassportKey(keyVal[0], keyVal[1])
+		invalidKey := !validatePassportKey(keyVal[0], keyVal[1])
 
-		if !matched {
+		if invalidKey {
 			return false
 		}
 	}
