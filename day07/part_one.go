@@ -16,7 +16,6 @@ func extractAllowedBags(rawAllowedBag string) []string {
 		allowedBags = append(allowedBags, rawOtherBag[2:])
 	}
 	return allowedBags
-
 }
 
 func generateGraph(rules []string) map[string][]string {
