@@ -20,7 +20,7 @@ func TestPartOne(t *testing.T) {
 	var list = utils.ReadInputFile("input.txt")
 
 	result := PartOne(list)
-	expected := 906
+	expected := 1528
 	if result != expected {
 		t.Errorf("Day 8, Part 1: %d; want %d", result, expected)
 	}

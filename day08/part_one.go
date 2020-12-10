@@ -1,39 +1,38 @@
 package dayEight
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
 
-func PartOne(instructions []string) int {
+func exec(instruction string, programCounter int, accumulator int) (int, int) {
+	parts := strings.Split(instruction, " ")
+	value, _ := strconv.Atoi(parts[1])
+	switch parts[0] {
+	case "jmp":
+		programCounter += value
+	case "acc":
+		accumulator += value
+		programCounter++
+	case "nop":
+		programCounter++
+	}
+	return programCounter, accumulator
+}
 
-	var rawInstruction []string
-	seenInstructionBefore := make(map[int]bool)
-	var instruction string
-	i := 0
+func PartOne(instructions []string) int {
+	instructionSet := make(map[int]bool)
+	nInstructions := len(instructions)
+
+	pc := 0
 	acc := 0
-	for i < len(instructions) {
-		if _, ok := seenInstructionBefore[i]; ok {
+	for pc < nInstructions {
+		if _, ok := instructionSet[pc]; ok {
 			break
 		} else {
-			seenInstructionBefore[i] = true
+			instructionSet[pc] = true
 		}
-		rawInstruction = strings.Split(instructions[i], " ")
-		instruction = rawInstruction[0]
-		value, _ := strconv.Atoi(rawInstruction[1])
-		switch instruction {
-		case "jmp":
-			fmt.Println("JUMP")
-			i += value
-		case "acc":
-			fmt.Println("ACC")
-			acc += value
-			i++
-		case "nop":
-			fmt.Println("NOP")
-			i++
-		}
+		pc, acc = exec(instructions[pc], pc, acc)
 	}
 	return acc
 }

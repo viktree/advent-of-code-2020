@@ -1,38 +1,55 @@
 package dayEight
 
-import (
-	"fmt"
-	"strconv"
-	"strings"
-)
+func tweakInstruction(instruction string) string {
+	instructionType := instruction[0:3]
+	if instructionType == "nop" {
+		return "jmp " + instruction[4:]
+	} else if instructionType == "jmp" {
+		return "nop " + instruction[4:]
+	}
+	return instruction
+}
 
 func PartTwo(instructions []string) int {
+	nInstructions := len(instructions)
+	instructionSet := make(map[int]string)
 
-	var rawInstruction []string
-	seenInstructionBefore := make(map[int]bool)
-	var instruction string
-	i := 0
+	pc := 0
 	acc := 0
-	for i < len(instructions) {
-		if _, ok := seenInstructionBefore[i]; ok {
+
+	var step string
+
+	for pc < nInstructions {
+		if _, ok := instructionSet[pc]; ok {
 			break
 		} else {
-			seenInstructionBefore[i] = true
+			instructionSet[pc] = instructions[pc]
 		}
-		rawInstruction = strings.Split(instructions[i], " ")
-		instruction = rawInstruction[0]
-		value, _ := strconv.Atoi(rawInstruction[1])
-		switch instruction {
-		case "jmp":
-			fmt.Println("JUMP")
-			i += value
-		case "acc":
-			fmt.Println("ACC")
-			acc += value
-			i++
-		case "nop":
-			fmt.Println("NOP")
-			i++
+		pc, acc = exec(instructions[pc], pc, acc)
+	}
+
+	for tweakIdx, originalInstruction := range instructionSet {
+		if originalInstruction[0:3] == "acc" {
+			continue
+		}
+		pc = 0
+		acc = 0
+		cache := make(map[int]bool)
+		for pc < nInstructions {
+			if pc == tweakIdx {
+				step = tweakInstruction(originalInstruction)
+			} else {
+				step = instructions[pc]
+			}
+			if _, ok := cache[pc]; ok {
+				break
+			} else {
+				cache[pc] = true
+			}
+			pc, acc = exec(step, pc, acc)
+		}
+		if pc == nInstructions {
+			return acc
 		}
 	}
 	return acc

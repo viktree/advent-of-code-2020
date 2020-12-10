@@ -1,4 +1,4 @@
-package daySeven
+package dayEight
 
 import (
 	"testing"
@@ -10,19 +10,9 @@ func TestPartTwoWithExample(t *testing.T) {
 	var list = utils.ReadInputFile("example.txt")
 
 	result := PartTwo(list)
-	expected := 32
+	expected := 8
 	if result != expected {
-		t.Errorf("Day 07, Part 2 (example): %d; want %d", result, expected)
-	}
-}
-
-func TestPartTwoWithExampleTwo(t *testing.T) {
-	var list = utils.ReadInputFile("example2.txt")
-
-	result := PartTwo(list)
-	expected := 126
-	if result != expected {
-		t.Errorf("Day 07, Part 2 (example 2): %d; want %d", result, expected)
+		t.Errorf("Day 08, Part 2 (example): %d; want %d", result, expected)
 	}
 }
 
@@ -30,8 +20,8 @@ func TestPartTwo(t *testing.T) {
 	var list = utils.ReadInputFile("input.txt")
 
 	result := PartTwo(list)
-	expected := 85324
+	expected := 640
 	if result != expected {
-		t.Errorf("Day 07, Part 2: %d; want %d", result, expected)
+		t.Errorf("Day 08, Part 2: %d; want %d", result, expected)
 	}
 }
